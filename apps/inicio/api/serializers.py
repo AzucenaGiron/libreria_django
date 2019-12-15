@@ -41,7 +41,3 @@ class ClienteSerializers(serializers.ModelSerializer):
         model = Cliente
         fields = ('__all__')
 
-class EditorialSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Editorial
-        fields = ('__all__')
