@@ -5,31 +5,70 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <title>BIBLIOTECA</title>
+
+
+    <style>
+            .card {
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+              max-width: 300px;
+              margin: auto;
+              text-align: center;
+            }
+
+            .title {
+              color: grey;
+              font-size: 18px;
+            }
+
+            button {
+              border: none;
+              outline: 0;
+              display: inline-block;
+              padding: 8px;
+              color: white;
+              background-color: #000;
+              text-align: center;
+              cursor: pointer;
+              width: 100%;
+              font-size: 18px;
+            }
+
+            a {
+              text-decoration: none;
+              font-size: 22px;
+              color: black;
+            }
+
+            button:hover, a:hover {
+              opacity: 0.7;
+            }
+    
+    </style>
 </head>
 
 
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                  <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" onclick="get_libro()" href="#">Libros</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                  </div>
-                </div>
-        </nav>
-
-          <div class="card-deck" id="contenido">
-            
-            
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Libreria B&G</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" onclick="get_libro()" href="#">Libros</a>
+        <a class="nav-item nav-link" href="#">Pricing</a>
+        <a class="nav-item nav-link disabled" href="#">Disabled</a>
+      </div>
+    </div>
+</nav>
+<div class="card-group" id="contenido"></div>
+        
 
           <script>
             var contenido = document.querySelector('#contenido')
@@ -48,23 +87,23 @@
 
                     data.map((valor,i)=>{
                       contenido.innerHTML += `
-                      <div class="card">
-                     
-                        <div class="card-body">
-                          <h5 class="card-title">${valor.titulo}</h5>
-                          <p class="card-text">${valor.autor.nombre}</p>
-                          <p class="card-text">${valor.categoria.categoria}</p>
-                          <p class="card-text">${valor.editorial.editorial}</p>
-                        </div>
-                      </div>     
+
+                  
+                    <div class="card">
+
+                      <img src="image/libro.jpg" style="width:100%">
+                      <h1>Libro</h1>
+                        <p class="title">${valor.titulo}</p>
+                        <p>${valor.autor.nombre}</p>
+                        <p>${valor.categoria.categoria}</p>
+                        <p>${valor.editorial.editorial}</p>
+                        <p><button>Prestar</button>
+                    </div>
+                  
                       `
                     })
                   }
           </script>
-
-      
-
-      
 
 </body>
 </html>
