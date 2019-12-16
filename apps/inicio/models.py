@@ -35,10 +35,10 @@ class Cliente(models.Model):
 
 class Alquiler(models.Model):
 
-    fechaSalida = models.CharField(max_length=100, blank = True, null =True)
-    fechaEntrada = models.CharField(max_length=100, blank = True, null =True)
-    cliente = models.ForeignKey(Cliente, blank = True, null =True,on_delete=models.SET_NULL)
-    libro = models.ForeignKey(Libros,blank = True, null =True,on_delete=models.SET_NULL)
+    #fechaSalida = models.DateField()
+    #fechaEntrada = models.DateField()
+    cliente = models.ForeignKey(Cliente, blank = True, null =True,on_delete=models.SET_NULL, related_name='cliente')
+    libro = models.ForeignKey(Libros,blank = True, null =True,on_delete=models.SET_NULL,related_name='libro')
 
 
 

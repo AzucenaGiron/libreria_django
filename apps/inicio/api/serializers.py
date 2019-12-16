@@ -28,16 +28,21 @@ class LibroSerializers(serializers.ModelSerializer):
         fields = ('__all__')
         #fields = ('id','titulo','categoria','autor','editorial')
 
+class ClienteSerializers(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Cliente
+        fields = ('__all__')
 
 class AlquilerSerializers(serializers.ModelSerializer):
+    libro = LibroSerializers(read_only=True)
+    libroId = serializers.PrimaryKeyRelatedField(write_only=True,queryset=Libros.objects.all(),source='libro')
+    cliente = ClienteSerializers(read_only=True)
+    clienteId = serializers.PrimaryKeyRelatedField(write_only=True,queryset=Cliente.objects.all(),source='cliente')
     class Meta:
         model = Alquiler
         fields = ('__all__')
         
 
-class ClienteSerializers(serializers.ModelSerializer):
-    libros = LibroSerializers(read_only=True)
-    class Meta:
-        model = Cliente
-        fields = ('__all__')
+
 
