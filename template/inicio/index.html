@@ -5,26 +5,60 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <title>BIBLIOTECA</title>
+
+
+
+
+    <style>
+      body,h1 {font-family: "Raleway", sans-serif}
+      body, html {height: 100%}
+      .bgimg {
+        background-color:#34495E;
+        min-height: 100%;
+        background-position: center;
+        background-size: cover;
+      }
+      </style>
 </head>
 
 
 
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">Libreria B&G</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Libros</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-item nav-link active" href="{% url 'inicio' %}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="{% url 'libros' %}">Libros</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+                    <a class="nav-item nav-link" href="">{{ user.username }}</a>
                   </div>
                 </div>
         </nav>
+
+
+        <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+          <div class="w3-display-topleft w3-padding-large w3-xlarge">
+            Libreria
+          </div>
+          <div class="w3-display-middle">
+            <h1 class="w3-jumbo w3-animate-top">LIBRERIA B&G</h1>
+            <hr class="w3-border-grey" style="margin:auto;width:40%">
+            <p class="w3-large w3-center">Vive para leer</p>
+          </div>
+          <div class="w3-display-bottomleft w3-padding-large">
+            Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"><br>EduardoBorraz.css<br>AzucenaGirón.css</a>
+          </div>
+        </div>
+        
 
 </body>
 </html>

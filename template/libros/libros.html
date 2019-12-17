@@ -11,10 +11,16 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+
+
+  
     <title>BIBLIOTECA</title>
 
 
     <style>
+      body{
+        background-color: #34495E;
+      }
             .card {
               box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
               max-width: 300px;
@@ -63,7 +69,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="{% url 'inicio' %}">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" onclick="get_libro()" href="#">Libros</a>
         <a class="nav-item nav-link" onclick="get_libroprestado()" href="#">Libros Prestados</a>
         <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
@@ -72,6 +78,10 @@
       </div>
     </div>
 </nav>
+
+
+
+
 
 <div class="card-group" id="contenido">
   
@@ -94,6 +104,7 @@
                   function post_libro(libro_id){
 
                     let user_id = '{{ user.id}}'
+                 
                     //alert("id usuario: "+user_id+", libro id: "+libro_id);
 
                     fetch('http://127.0.0.1:8000/api/Alquiler/',{
@@ -116,6 +127,7 @@
                   }
                  
                   function get_libroprestado(){
+
                     fetch('http://127.0.0.1:8000/api/Alquiler/')
                     .then(res => res.json())
                     .then(dato => {
@@ -123,21 +135,44 @@
                     })
                   }
 
+                  function put_libroprestado(libro){
+                    let user_id = '{{ user.id }}'
+
+                    fetch('http://127.0.0.1:8000/api/Alquiler/'+libro+'/',{
+                      method:'POST',
+                      credentials: "same-origin",
+                      body:JSON.stringify({
+                        
+                        libroId:libro
+                      }),
+                      headers:{
+                        'X-CSRFToken':csrftoken,
+                        'Accept':'application/json',
+                        'Content-Type': 'application/json',
+                        'X-Requested-With':'XMLHttpRequest'
+                      }
+
+                    }).then(res=>res.json())
+                    .catch(error=>console.error('Error',error))
+                    .then(response=>console.log('Success',response),alert("El libro se devolvió"));
+                  }
 
 
                   function card(data){
+                   
                     //console.log('data = ', data)
                     contenido.innerHTML = ''
                     //let x = {user.username}
                     //console.log(x);
                     data.map((valor,i)=>{
+                     
                       contenido.innerHTML += `
 
       <div class="col-md-4">
         <div class="card">
           <div class="card-header">
             <h3>${valor.titulo}</h3>
-            <h6>` +'{{ user.username }}'+ `</h6>
+           
           </div>
           <div class="card-body">
             <p>${valor.autor.nombre}</p>
@@ -149,15 +184,19 @@
         </div>
       </div>    
                       `
-
+                      
                     })
+                    
                   }
 
                   function carta(dato){
+                    let id_cliente = '{{ user.id }}'
+
                     console.log('data = ', dato)
                     contenido.innerHTML = ''
 
                     dato.map((valor,i)=>{
+                      if(valor.cliente.id == id_cliente){
                       contenido.innerHTML += `
 
       <div class="col-md-4">
@@ -171,16 +210,18 @@
             <p>${valor.libro.categoria.categoria}</p>
             <p>${valor.libro.editorial.editorial}</p>
           </div>
-          <button>Devolver</button>
+          <button onclick="put_libroprestado(${valor.libro.id})">Devolver</button>
           </div>
         </div>
       </div>    
                       `
-
+                      }
                     })
 
                   }
           </script>
+
+
 
 </body>
 </html>
